@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}">
+</head>
+<body>
+    <div class="container-transparent">
+        <div class="form-box">
+            <div class="logo">
+                <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
+            </div>
+            <h2>Faça seu cadastro</h2>
+            <form method="post" action="{% url 'cadastrar_usuario' %}">
+                {% csrf_token %}
+                <label for="username">Nome de Usuário</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+                
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                
+                <button type="submit">CADASTRAR-SE</button>
+            </form>
+        </div>
+        <div class="illustration">
+            <img src="{% static 'to_do_list/images/illustration.svg' %}" alt="Ilustração de tarefas">
+        </div>
+    </div>
+</body>
+</html>

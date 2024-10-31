@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #3498db; /* Cor de fundo */
+    background-image: url('/static/to_do_list/images/background-register.svg'); /* Imagem de fundo */
+    background-size: cover; /* Cobre toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
+}
+
+.container-transparent {
+    display: flex;
+    align-items: center;
+    max-width: 1000px;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.form-box {
+    background-color: #0d6efd; /* Azul para o formulário */
+    color: white;
+    padding: 40px;
+    width: 300px;
+    text-align: center;
+}
+
+.form-box .logo img {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+}
+
+.form-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-box label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.form-box input {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.form-box button {
+    background-color: #0056b3;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.form-box button:hover {
+    background-color: #004494;
+}
+
+.illustration {
+    padding: 20px;
+}
+
+.illustration img {
+    max-width: 500px;
+}
