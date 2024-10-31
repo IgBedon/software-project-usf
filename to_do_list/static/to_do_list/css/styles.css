@@ -19,6 +19,7 @@ body {
 
 .container-transparent {
     display: flex;
+    justify-content: center;
     align-items: center;
     max-width: 1000px;
     background-color: transparent;
@@ -26,16 +27,18 @@ body {
 }
 
 .form-box {
-    background-color: #0d6efd; /* Azul para o formulário */
+    background: linear-gradient(135deg, #007bff, #00a2ff); /* Gradiente */
     color: white;
     padding: 40px;
-    width: 300px;
+    width: 500px;
     text-align: center;
+    border-radius: 15px 0 0 15px; /* Bordas arredondadas apenas na lateral esquerda */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra leve dentro do form-box */
+    
 }
 
 .form-box .logo img {
-    max-width: 100px;
-    margin-bottom: 20px;
+    max-width: 200px;
 }
 
 .form-box h2 {
@@ -68,7 +71,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 12px;
     transition: background-color 0.3s;
 }
 

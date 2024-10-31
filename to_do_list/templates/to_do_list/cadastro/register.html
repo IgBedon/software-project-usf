@@ -17,14 +17,27 @@
             <h2>Faça seu cadastro</h2>
             <form method="post" action="{% url 'cadastrar_usuario' %}">
                 {% csrf_token %}
-                <label for="username">Nome de Usuário</label>
-                <input type="text" id="username" name="username" placeholder="Digite seu nome de usuário" required>
+                <label for="id_username">Nome de Usuário</label>
+                <input type="text" name="username" id="id_username" placeholder="Digite seu nome de usuário" required>
                 
-                <label for="password">Senha</label>
-                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                <label for="id_email">E-mail</label>
+                <input type="email" name="email" id="id_email" placeholder="Digite seu e-mail" required>
                 
-                <button type="submit">CADASTRAR-SE</button>
+                <label for="id_password1">Senha</label>
+                <input type="password" name="password1" id="id_password1" placeholder="Digite sua senha" required>
+
+                <label for="id_password2">Confirme a Senha</label>
+                <input type="password" name="password2" id="id_password2" placeholder="Confirme sua senha" required>
+                
+                <button type="submit">Cadastrar-se</button>
             </form>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
         <div class="illustration">
             <img src="{% static 'to_do_list/images/illustration.svg' %}" alt="Ilustração de tarefas">
