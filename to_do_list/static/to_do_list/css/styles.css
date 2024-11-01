@@ -120,6 +120,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding-top: 20px;
 }
 
@@ -131,26 +132,24 @@ body {
     max-width: 150px;
 }
 
-.sidebar ul {
-    list-style-type: none;
+.sidebar-options {
     width: 100%;
+    text-align: center;
 }
 
-.sidebar ul li {
-    width: 100%;
-    text-align: left;
-    padding: 10px 20px;
+.trash-div {
+    align-items: end;
 }
 
-.sidebar ul li a {
-    color: white;
+.link-options {
+    width: 100%;
     text-decoration: none;
-    font-size: 16px;
-    display: block;
+    color: white;
 }
 
-.sidebar ul li a:hover {
+.link-options:hover {
     background-color: #0056b3;
+    padding: 5px;
     border-radius: 5px;
 }
 

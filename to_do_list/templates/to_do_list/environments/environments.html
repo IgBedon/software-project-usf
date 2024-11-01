@@ -19,10 +19,12 @@
             <div class="logo">
                 <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
             </div>
-            <ul>
-                <li><a href="{% url 'create_environment' %}">Criar novo ambiente</a></li>
-                <li><a href="{% url 'trash' %}">Lixeira</a></li>
-            </ul>
+            <div class="sidebar-options">
+                <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
+            </div>
+            <div class="trash-div">
+                <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+            </div>
         </div>
 
         <div class="content">
