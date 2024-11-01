@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}">
+</head>
+<body>
+    <div class="container-transparent">
+        <div class="form-box">
+            <div class="logo">
+                <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
+            </div>
+            <h2>Faça seu login</h2>
+            <form method="post" action="{% url 'login_user' %}">
+                {% csrf_token %}
+                
+                <label for="id_email">E-mail</label>
+                <input type="email" name="email" id="id_email" placeholder="Digite seu e-mail" required>
+                
+                <label for="id_password">Senha</label>
+                <input type="password" name="password" id="id_password" placeholder="Digite sua senha" required>
+
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="redirect-link">
+                <p>Não possui uma conta?</p><a href="{% url 'register_user' %}">Cadastre-se</a>
+            </div>
+        </div>
+
+        <div class="illustration">
+            <img src="{% static 'to_do_list/images/illustration.svg' %}" alt="Ilustração de tarefas">
+        </div>
+        
+        {% if messages %}
+            {% for message in messages %}
+            <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}    
+        {% endif %}
+    </div>
+</body>
+</html>

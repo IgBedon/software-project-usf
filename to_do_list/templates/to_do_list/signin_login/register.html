@@ -15,7 +15,7 @@
                 <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
             </div>
             <h2>Faça seu cadastro</h2>
-            <form method="post" action="{% url 'cadastrar_usuario' %}">
+            <form method="post" action="{% url 'register_user' %}">
                 {% csrf_token %}
                 <label for="id_username">Nome de Usuário</label>
                 <input type="text" name="username" id="id_username" placeholder="Digite seu nome de usuário" required>
@@ -31,17 +31,19 @@
                 
                 <button type="submit">Cadastrar-se</button>
             </form>
-            {% if messages %}
-                <div class="messages_register">
-                    {% for message in messages %}
-                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
+            <div class="redirect-link">
+                <p>Já possui uma conta?</p><a href="{% url 'login_user' %}">Faça login</a>
+            </div>
         </div>
+
         <div class="illustration">
             <img src="{% static 'to_do_list/images/illustration.svg' %}" alt="Ilustração de tarefas">
         </div>
+        {% if messages %}
+            {% for message in messages %}
+            <script src="{% static "to_do_list/js/alert.js" %}" defer data-message="{{ message }}"></script>
+            {% endfor %}    
+        {% endif %}
     </div>
 </body>
 </html>

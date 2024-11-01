@@ -86,10 +86,15 @@ body {
     max-width: 500px;
 }
 
-.messages_register {
-    padding-top: 20px;
+.redirect-link {
+    margin-top: 15px;
 }
 
-.messages_register p {
-    font-size: 18px;
+.redirect-link a {
+    text-decoration: none;
+    color: white;
+}
+
+.redirect-link p {
+    color: rgb(221, 220, 220);
 }

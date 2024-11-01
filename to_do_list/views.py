@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -18,17 +18,17 @@ def register(request):
         # Verifica se as senhas coincidem
         if password1 != password2:
             messages.error(request, "As senhas não coincidem")
-            return redirect('cadastrar_usuario')
+            return redirect('register_user')
 
         # Verifica se o nome de usuário já existe
         if User.objects.filter(username=username).exists():
             messages.error(request, "Nome de usuário já está em uso")
-            return redirect('cadastrar_usuario')
+            return redirect('register_user')
 
         # Verifica se o e-mail já está registrado
         if User.objects.filter(email=email).exists():
             messages.error(request, "E-mail já está em uso")
-            return redirect('cadastrar_usuario')
+            return redirect('register_user')
 
         # Cria o novo usuário
         user = User.objects.create_user(username=username, email=email, password=password1)
@@ -37,7 +37,30 @@ def register(request):
         # Realiza login automático
         login(request, user)
         messages.success(request, f"Cadastro realizado com sucesso! Bem-vindo, {user.username}.")
-        return redirect('menu') 
+        return redirect('home')
+
+    return render(request, 'to_do_list/signin_login/register.html')
+
     
-    else:
-        return render(request, 'to_do_list/cadastro/register.html')
+def signin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        try:
+            existing_user = User.objects.get(email=email)
+            if existing_user:
+                user = authenticate(request, username=existing_user.username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect('home') 
+        except:
+            pass
+    
+        messages.error(request, 'Credenciais inválidas. Tente novamente.')
+        return redirect('login_user')
+    
+    return render(request, 'to_do_list/signin_login/login.html')
+
+
+def home(request):
+    return render(request, 'to_do_list/home/home.html')
