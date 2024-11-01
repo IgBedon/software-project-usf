@@ -32,11 +32,11 @@
                 <button type="submit">Cadastrar-se</button>
             </form>
             {% if messages %}
-                <ul class="messages">
+                <div class="messages_register">
                     {% for message in messages %}
-                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
                     {% endfor %}
-                </ul>
+                </div>
             {% endif %}
         </div>
         <div class="illustration">

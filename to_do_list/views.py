@@ -9,9 +9,7 @@ def health_check(request):
 
 
 def register(request):
-    if request.method == 'GET':
-        return render(request, 'to_do_list/cadastro/register.html')
-    else:
+    if request.method == 'POST':
         username = request.POST.get('username')
         email = request.POST.get('email')
         password1 = request.POST.get('password1')
@@ -19,17 +17,17 @@ def register(request):
 
         # Verifica se as senhas coincidem
         if password1 != password2:
-            messages.error(request, "As senhas não coincidem.")
+            messages.error(request, "As senhas não coincidem")
             return redirect('cadastrar_usuario')
 
         # Verifica se o nome de usuário já existe
         if User.objects.filter(username=username).exists():
-            messages.error(request, "Nome de usuário já está em uso.")
+            messages.error(request, "Nome de usuário já está em uso")
             return redirect('cadastrar_usuario')
 
         # Verifica se o e-mail já está registrado
         if User.objects.filter(email=email).exists():
-            messages.error(request, "E-mail já está em uso.")
+            messages.error(request, "E-mail já está em uso")
             return redirect('cadastrar_usuario')
 
         # Cria o novo usuário
@@ -39,5 +37,7 @@ def register(request):
         # Realiza login automático
         login(request, user)
         messages.success(request, f"Cadastro realizado com sucesso! Bem-vindo, {user.username}.")
-        return redirect('menu')  # Redireciona para a página inicial (ou substitua com a URL desejada)
+        return redirect('menu') 
     
+    else:
+        return render(request, 'to_do_list/cadastro/register.html')

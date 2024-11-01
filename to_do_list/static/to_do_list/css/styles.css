@@ -21,19 +21,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 1000px;
+    max-width: 1200px;
     background-color: transparent;
     overflow: hidden;
+    gap: 80px;
 }
 
 .form-box {
-    background: linear-gradient(135deg, #007bff, #00a2ff); /* Gradiente */
+    background-color: #007bff; /* Gradiente */
     color: white;
     padding: 40px;
     width: 500px;
     text-align: center;
-    border-radius: 15px 0 0 15px; /* Bordas arredondadas apenas na lateral esquerda */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra leve dentro do form-box */
     
 }
 
@@ -67,11 +66,11 @@ body {
 .form-box button {
     background-color: #0056b3;
     color: white;
-    padding: 10px;
+    padding: 15px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
@@ -85,4 +84,12 @@ body {
 
 .illustration img {
     max-width: 500px;
+}
+
+.messages_register {
+    padding-top: 20px;
+}
+
+.messages_register p {
+    font-size: 18px;
 }
