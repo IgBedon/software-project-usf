@@ -10,6 +10,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+}
+
+.start-page {
     background-color: #3498db; /* Cor de fundo */
     background-image: url('/static/to_do_list/images/background-register.svg'); /* Imagem de fundo */
     background-size: cover; /* Cobre toda a tela */
@@ -97,4 +100,166 @@ body {
 
 .redirect-link p {
     color: rgb(221, 220, 220);
+}
+
+.base-page {
+    display: inline;
+}
+
+.body-main {
+    display: flex;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.sidebar .logo {
+    margin-left: -30px;
+}
+
+.sidebar .logo img {
+    max-width: 150px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    width: 100%;
+}
+
+.sidebar ul li {
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+.content {
+    flex: 1;
+    flex-direction: column;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.header-right-side {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-image: url('/static/to_do_list/images/background-register.svg');
+    padding: 10px 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.header-right-side i {
+    color: white;
+}
+
+.user-icon {
+    margin-right: 10px;
+}
+
+.username {
+    color: white;
+}
+
+.main-right-side {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 20px;
+    color: #333;
+    background-image: url('/static/to_do_list/images/content.svg');
+    background-size: cover; /* Cobre toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
+}
+
+.environments-form {
+    width: 100%;
+    max-width: 700px;
+    background-color: #e0f7fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.environments-form .form-row {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.environments-form .form-row label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.environments-form .form-row input,
+.environments-form .form-row textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    width: 100%;
+}
+
+.environments-form .form-row textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+.environments-form .file-upload {
+    border: 2px dashed #007bff;
+    padding: 10px;
+    text-align: center;
+    color: #007bff;
+    background-color: #f0f8ff;
+    border-radius: 5px;
+}
+
+.environments-form .file-upload p {
+    font-size: 14px;
+    color: #007bff;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
 }

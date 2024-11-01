@@ -64,3 +64,18 @@ def signin(request):
 
 def home(request):
     return render(request, 'to_do_list/home/home.html')
+
+
+def environments(request):
+    return render(request, 'to_do_list/environments/environments.html')
+
+
+def create_environment(request):
+    if request.method == 'POST':
+        pass
+
+    return render(request, 'to_do_list/environments/create_environment.html')
+
+
+def trash(request):
+    return HttpResponse('Lixeira')

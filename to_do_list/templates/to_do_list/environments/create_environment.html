@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Easy environment</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}">
+</head>
+<body class="base-page">
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy environment Logo">
+        </div>
+        <ul>
+            <li><a href="{% url 'create_environment' %}">Criar novo ambiente</a></li>
+            <li><a href="{% url 'trash' %}">Lixeira</a></li>
+        </ul>
+    </div>
+
+    <div class="content">
+        <header class="header-right-side">
+            <span class="user-icon">👤</span>
+            <span class="username">USUÁRIO</span>
+        </header>
+        <main>
+            <form class="environment-form" method="post" action="{% url 'create_environment' %}">
+                <div class="form-row">
+                    <label for="environment_name">Nome da tarefa</label>
+                    <input type="text" id="environment_name" name="environment_name">
+                </div>
+                <div class="form-row">
+                    <label for="responsible">Responsável</label>
+                    <input type="text" id="responsible" name="responsible">
+                </div>
+                <div class="form-row">
+                    <label for="description">Descrição da tarefa</label>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="start_date">Data de Início</label>
+                    <input type="date" id="start_date" name="start_date">
+                </div>
+                <div class="form-row">
+                    <label for="end_date">Data de Término</label>
+                    <input type="date" id="end_date" name="end_date">
+                </div>
+                <div class="form-row">
+                    <label for="priority">Prioridade</label>
+                    <input type="text" id="priority" name="priority">
+                </div>
+                <div class="form-row">
+                    <label for="status">Status</label>
+                    <input type="text" id="status" name="status">
+                </div>
+                <div class="form-row">
+                    <label for="category">Categoria</label>
+                    <input type="text" id="category" name="category">
+                </div>
+                <div class="form-row">
+                    <label for="checklist">Checklist</label>
+                    <textarea id="checklist" name="checklist"></textarea>
+                </div>
+                <div class="form-row">
+                    <label for="comments">Comentários</label>
+                    <textarea id="comments" name="comments"></textarea>
+                </div>
+                <div class="form-row file-upload">
+                    <label for="file">Anexar arquivo</label>
+                    <input type="file" id="file" name="file">
+                    <p>Arraste seus arquivos aqui ou selecione arquivos do seu computador</p>
+                </div>
+                <button type="submit" class="submit-btn">Criar Tarefa</button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
