@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -61,15 +62,16 @@ def signin(request):
     
     return render(request, 'to_do_list/signin_login/login.html')
 
-
+@login_required
 def home(request):
     return render(request, 'to_do_list/home/home.html')
 
-
+@login_required
 def environments(request):
     return render(request, 'to_do_list/environments/environments.html')
 
 
+@login_required
 def create_environment(request):
     if request.method == 'POST':
         pass
@@ -77,5 +79,6 @@ def create_environment(request):
     return render(request, 'to_do_list/environments/create_environment.html')
 
 
+@login_required
 def trash(request):
     return HttpResponse('Lixeira')
