@@ -104,6 +104,8 @@ body {
 
 .base-page {
     display: inline;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .body-main {
@@ -117,10 +119,9 @@ body {
     background-color: #007bff;
     color: white;
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     padding-top: 20px;
 }
 
@@ -132,13 +133,27 @@ body {
     max-width: 150px;
 }
 
+.sidebar-body {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Preenche o espaço restante */
+    justify-content: space-between; /* Posiciona items no topo e no final */
+    width: 100%; /* Para ocupar toda a largura */
+}
+
 .sidebar-options {
     width: 100%;
     text-align: center;
 }
 
 .trash-div {
-    align-items: end;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 80px; /* Para dar um espaço do final da sidebar */
+}
+
+.trash-div a{
+    font-weight: bold;
 }
 
 .link-options {
@@ -149,7 +164,7 @@ body {
 
 .link-options:hover {
     background-color: #0056b3;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
 }
 

@@ -16,14 +16,18 @@
 
     <div class="body-main">
         <div class="sidebar">
-            <div class="logo">
-                <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo">
+                </div>
             </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
-            </div>
-            <div class="trash-div">
-                <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+            <div class="sidebar-body">
+                <div class="sidebar-options">
+                    <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
+                </div>
+                <div class="trash-div">
+                    <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+                </div>
             </div>
         </div>
 
