@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Easy environment</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
+  </head>
+  <body class="base-page">
+    <header class="header-right-side">
+      <i class="fas fa-user"></i>
+    </header>
+
+    <div class="body-main">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo" />
+          </div>
+        </div>
+        <div class="sidebar-body">
+          <div class="sidebar-options">
+            <a class="link-options" href="{% url 'environments' %}">Voltar</a>
+          </div>
+          <div class="trash-div">
+            <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <main class="main-right-side-create">
+          <form class="create-form" method="post" action="{% url 'create_task' %}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="task_title">Título da Tarefa</label>
+              <input type="text" id="task_title" name="title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="task_description">Descrição da Tarefa</label>
+              <textarea id="task_description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="task_status">Status</label>
+              <select id="task_status" name="status" required>
+                <option value="Não iniciado">Não iniciado</option>
+                <option value="Em progresso">Em progresso</option>
+                <option value="Finalizado">Finalizado</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="task_priority">Prioridade</label>
+              <input type="number" id="task_priority" name="priority" required min="1" />
+            </div>
+
+            <div class="form-group">
+              <label for="task_deadline">Prazo</label>
+              <input type="date" id="task_deadline" name="deadline" required />
+            </div>
+
+            <button type="submit" class="submit-btn">Criar Tarefa</button>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -91,5 +91,51 @@ def create_environment(request):
 
 
 @login_required
+def tasks(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id)
+
+    if environment:
+        tasks = Task.objects.filter(environment=environment)
+        context = {
+            'environment': environment,
+            'tasks': tasks
+        }
+    else:
+        context = {}
+
+    return render(request, 'to_do_list/tasks/tasks.html', context)
+
+
+@login_required
+def create_task(request, environment_id):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        priority = request.POST.get('priority')
+        deadline = request.POST.get('deadline')
+        environment = Environment.objects.filter(id=environment_id)
+
+        Environment.objects.create(title=title, description=description, status=status, priority=priority, deadline=deadline, environment=environment)
+        return redirect('tasks', environment_id)
+
+    return render(request, 'to_do_list/environments/create_task.html')
+
+
+@login_required
+def task_detail(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id)
+
+    if task:
+        context = {
+            'task': task
+        }
+    else:
+        context = {}
+
+    return render(request, 'to_do_list/tasks/task_detail.html', context)
+
+
+@login_required
 def trash(request):
     return HttpResponse('Lixeira')

@@ -23,7 +23,7 @@
         </div>
         <div class="sidebar-body">
           <div class="sidebar-options">
-            <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
+            <a class="link-options" href="{% url 'create_task' %}">Criar nova tarefa</a>
           </div>
           <div class="trash-div">
             <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
@@ -33,21 +33,24 @@
 
       <div class="content">
         <main class="main-right-side-show">
-          {% if environments %}
-            <div class="organize-card">
-              {% for environment in environments %}
-                <a href="{% url 'tasks' environment.id %}">
-                  <div class="card">
-                    <h3 class="card-title">{{ environment.title }}</h3>
-                    <p class="card-description">{{ environment.description }}</p>
-                  </div>
-                </a>
-              {% endfor %}
-            </div>
-          {% else %}
-            <p>Comece agora a organizar suas tarefas separando-as em ambientes!</p>
-          {% endif %}
-        </main>
+            {% if tasks %}
+              <div class="organize-card">
+                {% for task in tasks %}
+                  <a href="{% url 'task_detail' environment.id task.id %}">
+                    <div class="card">
+                      <h3 class="card-title">{{ task.title }}</h3>
+                      <p class="card-description">{{ task.description }}</p>
+                      <p>Status: {{ task.status }}</p>
+                      <p>Prioridade: {{ task.priority }}</p>
+                      <p>Prazo: {{ task.deadline }}</p>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p>Comece agora a organizar suas tarefas!</p>
+            {% endif %}
+          </main>
       </div>
     </div>
   </body>
