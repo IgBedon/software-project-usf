@@ -32,8 +32,16 @@
         </div>
 
         <div class="content">
-            <main class="main-right-side">
-                <p>Comece agora a organizar suas tarefas!</p>
+            <main class="main-right-side-show">
+                {% if environments %}
+                {% for environment in environments %}
+                    <div class="card">
+                        <h3 class="card-title">{{environment.title}}</h3>
+                        <p class="card-description">{{environment.description}}</p>
+                    </div>
+                {% endfor %}
+                {% endif %}
+                    <p>Comece agora a organizar suas tarefas!</p>
             </main>
         </div>
     </div>

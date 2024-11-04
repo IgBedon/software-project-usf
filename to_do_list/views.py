@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
+from .models import Environment, Task, Category, Attachment
 
 def health_check(request):
     return HttpResponse('Web Server is online!')
@@ -68,13 +69,23 @@ def home(request):
 
 @login_required
 def environments(request):
-    return render(request, 'to_do_list/environments/environments.html')
+    environments = Environment.objects.filter(owner=request.user)
+    context = {
+        'environments': environments
+    }
+
+    return render(request, 'to_do_list/environments/environments.html', context)
 
 
 @login_required
 def create_environment(request):
     if request.method == 'POST':
-        pass
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        owner = request.user
+
+        Environment.objects.create(title=title, description=description, owner=owner)
+        return redirect('environments')
 
     return render(request, 'to_do_list/environments/create_environment.html')
 

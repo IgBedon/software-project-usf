@@ -169,10 +169,13 @@ body {
 }
 
 .content {
+    display: flex;
     flex: 1;
-    flex-direction: column;
-    background-color: white;
-    min-height: 100vh;
+    background-color: rgb(231, 229, 229);
+    height: 100vh;
+    width: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-right-side {
@@ -196,7 +199,7 @@ body {
     color: white;
 }
 
-.main-right-side {
+.main-right-side-show {
     display: flex;
     min-height: 100vh;
     justify-content: center;
@@ -204,7 +207,7 @@ body {
     flex-grow: 1;
     font-size: 20px;
     color: #333;
-    background-image: url('/static/to_do_list/images/content.svg');
+    background-image: url('/static/to_do_list/images/content-show.svg');
     background-size: cover; /* Cobre toda a tela */
     background-position: center; /* Centraliza a imagem */
     background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
@@ -276,4 +279,92 @@ body {
 
 .submit-btn:hover {
     background-color: #0056b3;
+}
+
+.card {
+    width: 250px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.card-description {
+    font-size: 14px;
+    color: #6c757d;
+    line-height: 1.4;
+}
+
+.main-right-side-create {
+    display: flex;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    font-size: 20px;
+    color: #333;
+    background-image: url('/static/to_do_list/images/content-create.svg');
+    background-size: cover; /* Cobre toda a tela */
+    background-position: center; /* Centraliza a imagem */
+    background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
+}
+
+.create-form {
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    height: 80px;
+}
+
+.file-upload {
+    border: 2px dashed #007bff;
+    padding: 15px;
+    text-align: center;
+    color: #007bff;
+    background-color: #f0f8ff;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
