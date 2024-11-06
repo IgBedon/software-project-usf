@@ -91,19 +91,21 @@ def create_environment(request):
 
 
 @login_required
-def tasks(request, environment_id):
+def environment_selected(request, environment_id):
     environment = Environment.objects.filter(id=environment_id).first()
 
     if environment:
         tasks = Task.objects.filter(environment=environment)
+        categories = Category.objects.filter(environment=environment)
         context = {
             'environment': environment,
-            'tasks': tasks
+            'tasks': tasks,
+            'categories': categories
         }
     else:
         context = {}
 
-    return render(request, 'to_do_list/tasks/tasks.html', context)
+    return render(request, 'to_do_list/environments/environment.html', context)
 
 
 @login_required
@@ -118,7 +120,7 @@ def create_task(request, environment_id):
         deadline = request.POST.get('deadline')
 
         Task.objects.create(title=title, description=description, status=status, priority=priority, deadline=deadline, environment=environment)
-        return redirect('tasks', environment_id) 
+        return redirect('environment', environment_id) 
 
     context = {
         'environment': environment 
@@ -139,6 +141,39 @@ def task_detail(request, environment_id, task_id):
         context = {}
 
     return render(request, 'to_do_list/tasks/task_detail.html', context)
+
+
+@login_required
+def create_category(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id).first()
+    
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        color = request.POST.get('color')
+
+        Category.objects.create(title=title, description=description, color=color, environment=environment)
+        return redirect('environment', environment_id) 
+
+    context = {
+        'environment': environment 
+    }   
+
+    return render(request, 'to_do_list/categories/create_category.html', context)
+
+
+@login_required
+def category_detail(request, environment_id, category_id):
+    category = Category.objects.filter(id=category_id)
+
+    if category:
+        context = {
+            'category': category
+        }
+    else:
+        context = {}
+
+    return render(request, 'to_do_list/categories/category_detail.html', context)
 
 
 @login_required

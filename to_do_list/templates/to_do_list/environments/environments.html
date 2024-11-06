@@ -22,11 +22,13 @@
           </div>
         </div>
         <div class="sidebar-body">
-          <div class="sidebar-options">
-            <a class="link-options" href="{% url 'home' %}">Voltar para Home</a>
-          </div>
-          <div class="sidebar-options">
-            <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
+          <div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'home' %}">Voltar para Home</a>
+            </div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
+            </div>
           </div>
           <div class="trash-div">
             <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
@@ -36,10 +38,11 @@
 
       <div class="content">
         <main class="main-right-side-show">
+          <h1>Ambientes</h1>
           {% if environments %}
             <div class="organize-card">
               {% for environment in environments %}
-                <a href="{% url 'tasks' environment.id %}">
+                <a href="{% url 'environment' environment.id %}">
                   <div class="card">
                     <h3 class="card-title">{{ environment.title }}</h3>
                     <p class="card-description">{{ environment.description }}</p>

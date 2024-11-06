@@ -34,39 +34,36 @@
 
       <div class="content">
         <main class="main-right-side-create">
-          <form class="create-form" method="post" action="{% url 'create_task' environment.id %}">
+          <form class="create-form" method="post" action="{% url 'create_category' environment.id %}">
             {% csrf_token %}
             <div class="form-group">
-              <label for="task_title">Título da Tarefa</label>
-              <input type="text" id="task_title" name="title" required />
+              <label for="category_title">Título da Categoria</label>
+              <input type="text" id="category_title" name="title" required />
             </div>
 
             <div class="form-group">
-              <label for="task_description">Descrição da Tarefa</label>
-              <textarea id="task_description" name="description" required></textarea>
+              <label for="category_description">Descrição da Categoria</label>
+              <textarea id="category_description" name="description" required></textarea>
             </div>
 
             <div class="form-group">
-              <label for="task_status">Status</label>
-              <select id="task_status" name="status" required>
-                <option value="" disabled selected>Selecione um status</option>
-                <option value="Não iniciado">Não iniciado</option>
-                <option value="Em progresso">Em progresso</option>
-                <option value="Finalizado">Finalizado</option>
+              <label for="category_color">Cor da Categoria</label>
+              <select id="category_color" name="color" required>
+                <option value="" disabled selected>Selecione uma cor</option>
+                <option value="green">Verde</option>
+                <option value="yellow">Amarelo</option>
+                <option value="red">Vermelho</option>
+                <option value="purple">Roxo</option>
+                <option value="blue">Azul</option>
+                <option value="pink">Rosa</option>
+                <option value="black">Preto</option>
+                <option value="white">Branco</option>
+                <option value="orange">Laranja</option>
+                <option value="grey">Cinza</option>
               </select>
             </div>
 
-            <div class="form-group">
-              <label for="task_priority">Prioridade</label>
-              <input type="number" id="task_priority" name="priority" required min="1" max="5" />
-            </div>
-
-            <div class="form-group">
-              <label for="task_deadline">Prazo</label>
-              <input type="date" id="task_deadline" name="deadline" required />
-            </div>
-
-            <button type="submit" class="submit-btn">Criar Tarefa</button>
+            <button type="submit" class="submit-btn">Criar Categoria</button>
           </form>
         </main>
       </div>
