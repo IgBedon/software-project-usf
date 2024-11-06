@@ -92,7 +92,7 @@ def create_environment(request):
 
 @login_required
 def tasks(request, environment_id):
-    environment = Environment.objects.filter(id=environment_id)
+    environment = Environment.objects.filter(id=environment_id).first()
 
     if environment:
         tasks = Task.objects.filter(environment=environment)
@@ -108,18 +108,23 @@ def tasks(request, environment_id):
 
 @login_required
 def create_task(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id).first()
+    
     if request.method == 'POST':
         title = request.POST.get('title')
         description = request.POST.get('description')
         status = request.POST.get('status')
         priority = request.POST.get('priority')
         deadline = request.POST.get('deadline')
-        environment = Environment.objects.filter(id=environment_id)
 
-        Environment.objects.create(title=title, description=description, status=status, priority=priority, deadline=deadline, environment=environment)
-        return redirect('tasks', environment_id)
+        Task.objects.create(title=title, description=description, status=status, priority=priority, deadline=deadline, environment=environment)
+        return redirect('tasks', environment_id) 
 
-    return render(request, 'to_do_list/environments/create_task.html')
+    context = {
+        'environment': environment 
+    }   
+
+    return render(request, 'to_do_list/tasks/create_task.html', context)
 
 
 @login_required

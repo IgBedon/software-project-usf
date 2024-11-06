@@ -296,6 +296,10 @@ body {
     padding: 20px;
 }
 
+.organize-card a{
+    text-decoration: none;
+}
+
 .card {
     width: 300px; /* Largura fixa para que os cards fiquem alinhados em colunas */
     height: 200px;
@@ -365,7 +369,8 @@ body {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;

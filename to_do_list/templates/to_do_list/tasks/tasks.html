@@ -23,7 +23,10 @@
         </div>
         <div class="sidebar-body">
           <div class="sidebar-options">
-            <a class="link-options" href="{% url 'create_task' %}">Criar nova tarefa</a>
+            <a class="link-options" href="{% url 'environments' %}">Voltar para os Ambientes</a>
+          </div>
+          <div class="sidebar-options">
+            <a class="link-options" href="{% url 'create_task' environment.id %}">Criar nova tarefa</a>
           </div>
           <div class="trash-div">
             <a class="link-options" href="{% url 'trash' %}">Lixeira</a>

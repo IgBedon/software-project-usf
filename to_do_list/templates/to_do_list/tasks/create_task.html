@@ -22,7 +22,7 @@
         </div>
         <div class="sidebar-body">
           <div class="sidebar-options">
-            <a class="link-options" href="{% url 'environments' %}">Voltar</a>
+            <a class="link-options" href="{% url 'tasks' environment.id %}">Voltar</a>
           </div>
           <div class="trash-div">
             <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
@@ -32,7 +32,7 @@
 
       <div class="content">
         <main class="main-right-side-create">
-          <form class="create-form" method="post" action="{% url 'create_task' %}">
+          <form class="create-form" method="post" action="{% url 'create_task' environment.id %}">
             {% csrf_token %}
             <div class="form-group">
               <label for="task_title">Título da Tarefa</label>
@@ -55,7 +55,7 @@
 
             <div class="form-group">
               <label for="task_priority">Prioridade</label>
-              <input type="number" id="task_priority" name="priority" required min="1" />
+              <input type="number" id="task_priority" name="priority" required min="1" max="5" />
             </div>
 
             <div class="form-group">
