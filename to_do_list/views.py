@@ -9,6 +9,10 @@ from .models import Environment, Task, Category, Attachment
 def health_check(request):
     return HttpResponse('Web Server is online!')
 
+@login_required
+def root(request):
+    return HttpResponse("Welcome to Easy Task")
+
 
 def register(request):
     if request.method == 'POST':
@@ -39,7 +43,7 @@ def register(request):
         # Realiza login automático
         login(request, user)
         messages.success(request, f"Cadastro realizado com sucesso! Bem-vindo, {user.username}.")
-        return redirect('home')
+        return redirect('environments')
 
     return render(request, 'to_do_list/signin_login/register.html')
 
@@ -54,7 +58,7 @@ def signin(request):
                 user = authenticate(request, username=existing_user.username, password=password)
                 if user is not None:
                     login(request, user)
-                    return redirect('home') 
+                    return redirect('environments') 
         except:
             pass
     
@@ -63,9 +67,9 @@ def signin(request):
     
     return render(request, 'to_do_list/signin_login/login.html')
 
-@login_required
-def home(request):
-    return render(request, 'to_do_list/home/home.html')
+# @login_required
+# def home(request):
+#     return render(request, 'to_do_list/home/home.html')
 
 @login_required
 def environments(request):

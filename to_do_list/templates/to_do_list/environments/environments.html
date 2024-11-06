@@ -24,9 +24,6 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-              <a class="link-options" href="{% url 'home' %}">Voltar para Home</a>
-            </div>
-            <div class="sidebar-options">
               <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
             </div>
           </div>
@@ -51,7 +48,7 @@
               {% endfor %}
             </div>
           {% else %}
-            <p>Comece agora a organizar suas tarefas separando-as em ambientes!</p>
+            <p class="text-motivation">Comece agora a organizar suas tarefas separando-as em ambientes!</p>
           {% endif %}
         </main>
       </div>

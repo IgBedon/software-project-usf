@@ -10,17 +10,6 @@ class Environment(models.Model):
         return self.title
 
 
-class Task(models.Model):
-    title = models.CharField(max_length=100)  
-    description = models.TextField()
-    status = models.CharField(max_length=25)
-    priority = models.IntegerField()
-    deadline = models.DateField()
-    environment = models.ForeignKey(Environment, on_delete=models.CASCADE)
-
-
-    def __str__(self):
-        return self.title
     
 
 class Category(models.Model):
@@ -33,6 +22,20 @@ class Category(models.Model):
     def __str__(self):
         return self.title
     
+
+class Task(models.Model):
+    title = models.CharField(max_length=100)  
+    description = models.TextField()
+    status = models.CharField(max_length=25)
+    priority = models.IntegerField()
+    deadline = models.DateField()
+    categories = models.ManyToManyField(Category, related_name="tasks")
+    environment = models.ForeignKey(Environment, on_delete=models.CASCADE)
+
+
+    def __str__(self):
+        return self.title
+
 
 class Attachment (models.Model):
     title = models.CharField(max_length=100)  
