@@ -1,13 +1,11 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
 from .models import Environment, Task, Category, Attachment
 
-def health_check(request):
-    return HttpResponse('Web Server is online!')
 
 @login_required
 def root(request):
@@ -67,9 +65,21 @@ def signin(request):
     
     return render(request, 'to_do_list/signin_login/login.html')
 
-# @login_required
-# def home(request):
-#     return render(request, 'to_do_list/home/home.html')
+
+def logout_user(request):
+    logout(request)
+    return redirect('login_user')
+
+
+@login_required
+def account(request):
+    user = request.user
+    context = {
+        'user': user
+    }
+
+    return render(request, "to_do_list/account/account.html", context)
+
 
 @login_required
 def environments(request):

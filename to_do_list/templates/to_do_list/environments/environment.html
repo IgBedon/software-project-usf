@@ -11,7 +11,8 @@
   </head>
   <body class="base-page">
     <header class="header-right-side">
-      <i class="fas fa-user"></i>
+      <a class="account-link" href="{% url 'account' %}"><i class="fas fa-user"></i></a>
+      <a class="account-link" href="{% url 'logout' %}"><i class="fas fa-sign-out" aria-hidden="true"></i></a>
     </header>
 
     <div class="body-main">
@@ -30,7 +31,7 @@
               <a class="link-options" href="{% url 'create_task' environment.id %}">Criar nova tarefa</a>
             </div>
             <div class="sidebar-options">
-              <a class="link-options" href="{% url 'create_category' environment.id %}">Criar nova Categoria</a>
+              <a class="link-options" href="{% url 'create_category' environment.id %}">Criar nova categoria</a>
             </div>
           </div>
           <div class="trash-div">

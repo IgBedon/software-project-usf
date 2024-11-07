@@ -10,7 +10,8 @@
 </head>
 <body class="base-page">
     <header class="header-right-side">
-        <i class="fas fa-user"></i>
+        <a class="account-link" href="{% url 'account' %}"><i class="fas fa-user"></i></a>
+      <a class="account-link" href="{% url 'logout' %}"><i class="fas fa-sign-out" aria-hidden="true"></i></a>
     </header>
 
     <div class="body-main">
