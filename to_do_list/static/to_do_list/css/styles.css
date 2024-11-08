@@ -416,6 +416,31 @@ body {
     margin-bottom: 15px;
 }
 
+.custom-file-input {
+    display: none;
+}
+
+/* Estilo para o label que será o botão de upload */
+.custom-file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border: 1px, solid, #ccc;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-file-label:hover{
+    transition: 0.3s;
+    background-color: #007bff;
+    color: white;
+    border: 1px, solid, #007bff;
+    cursor: pointer;
+}
 
 /* Profile Container */
 
