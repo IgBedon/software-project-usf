@@ -81,6 +81,35 @@ def account(request):
     return render(request, "to_do_list/account/account.html", context)
 
 
+def update_account(request):
+    user = request.user
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+
+        if username != user.username or email != user.email:
+            User.objects.filter(id=user.id).update(username=username, email=email)
+
+        return redirect('account')
+
+    context = {
+        'username' : user.username,
+        'email': user.email,
+        'password': user.password
+    }
+
+    return render(request, 'to_do_list/account/update_account.html', context)
+
+
+def delete_account(request):
+    pass
+
+
+def update_account_password(request):
+    pass
+
+
 @login_required
 def environments(request):
     environments = Environment.objects.filter(owner=request.user)

@@ -380,10 +380,20 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.update-form {
+    margin: 35px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    text-align: start;
+}
+
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+    width: 100%;
 }
 
 .form-group label {
@@ -450,7 +460,7 @@ body {
 }
 
 .profile-container {
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 50px;
     background-color: #f7f7f7;
