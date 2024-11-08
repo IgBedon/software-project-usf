@@ -76,19 +76,7 @@
               </div>
             </div>
 
-            <script>
-              // JavaScript para exibir o nome do arquivo selecionado
-              const fileInput = document.getElementById('task_attachment')
-              const fileLabel = document.getElementById('file-label')
-              
-              fileInput.addEventListener('change', function () {
-                if (fileInput.files.length > 0) {
-                  fileLabel.textContent = fileInput.files[0].name
-                } else {
-                  fileLabel.textContent = 'Adicionar arquivo'
-                }
-              })
-            </script>
+            <script src="{% static 'to_do_list/js/get_file_name.js' %}" defer></script>
 
             <button type="submit" class="submit-btn">Criar Tarefa</button>
           </form>
