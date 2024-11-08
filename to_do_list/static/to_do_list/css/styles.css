@@ -179,12 +179,11 @@ body {
 
 .link-options {
     display: inline-block; 
-    width: 100%;
+    width: 75%;
     text-decoration: none;
     color: white;
     font-size: 20px;
-    padding: 10px 0; 
-    padding-left: 10px;
+    padding: 10px 5px;
     border-radius: 5px;
     background-color: #0056b3;
     line-height: 1.4; 
