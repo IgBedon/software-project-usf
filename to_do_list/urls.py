@@ -11,7 +11,6 @@ urlpatterns = [
     path('account/update/', views.update_account, name="update_account"),
     path('account/update/password/', views.update_account_password, name="update_account_password"),
     path('account/delete/', views.delete_account, name="delete_account"),
-    # path('home/', views.home, name="home"),
 
     path('environments/', views.environments, name="environments"),
     path('environments/create/', views.create_environment, name="create_environment"),
@@ -22,9 +21,6 @@ urlpatterns = [
 
     path('environments/<int:environment_id>/categories/create/', views.create_category, name="create_category"),
     path('environments/<int:environment_id>/categories/<int:category_id>/', views.category_detail, name="category_detail"),
-
-
-    # path('home/', views.home, name="task_list"),
 
     path('trash/', views.trash, name="trash"),
 ]

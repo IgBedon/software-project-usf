@@ -25,7 +25,9 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-              <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
+              <div class="link-background">
+                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
+              </div>
             </div>
           </div>
           <div class="trash-div">

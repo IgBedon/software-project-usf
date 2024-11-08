@@ -52,6 +52,12 @@
               </div>
             </div>
           </div>
+
+          {% if messages %}
+            {% for message in messages %}
+              <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}
+          {% endif %}
         </main>
       </div>
     </div>

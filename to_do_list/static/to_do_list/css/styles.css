@@ -177,10 +177,23 @@ body {
     background-color: #0056b3;
 }
 
+.link-options {
+    display: inline-block; 
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    padding: 10px 0; 
+    padding-left: 10px;
+    border-radius: 5px;
+    background-color: #0056b3;
+    line-height: 1.4; 
+    word-wrap: break-word; 
+    white-space: normal;
+}
+
 .link-options:hover {
     background-color: #004494;
-    padding: 10px;
-    border-radius: 5px;
 }
 
 .content {

@@ -107,7 +107,31 @@ def delete_account(request):
 
 
 def update_account_password(request):
-    pass
+    user = User.objects.get(id=request.user.id)
+
+    if request.method == 'POST':
+        password = request.POST.get('password')
+        user_password = authenticate(username=user.username, password=password)
+
+        if user_password is not None:
+            new_password = request.POST.get('new_password')
+            new_password_check = request.POST.get('new_password_check')
+
+            if new_password == new_password_check:
+                user.set_password(new_password)
+                user.save()
+                login(request, user)
+
+                messages.success(request, 'Senha alterada com sucesso!')
+                return redirect('account')
+            
+            messages.error(request, 'As senhas a serem inseridas não coincidem. Tente novamente.')
+            return redirect('update_account_password')
+        
+        messages.error(request, 'A senha atual está incorreta. Tente novamente.')
+        return redirect('update_account_password')
+
+    return render(request, 'to_do_list/account/update_account_password.html')
 
 
 @login_required
