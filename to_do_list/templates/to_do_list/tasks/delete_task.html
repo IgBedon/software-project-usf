@@ -25,13 +25,7 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'update_task' environment.id task.id %}">Editar tarefa</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'delete_task' environment.id task.id %}">Deletar tarefa</a>
+              <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
             </div>
           </div>
           <div class="about-us-div">
@@ -41,14 +35,17 @@
       </div>
 
       <div class="content">
-        <main class="main-right-side-show">
-          <div class='organize-card-detail'>
-            <div class="card-detail">
-              <h1 class="card-title">{{ task.title }}</h1>
-              <p class="card-description">{{ task.description }}</p>
-              <p>Status: {{ task.status }}</p>
-              <p>Prioridade: {{ task.priority }}</p>
-              <p>Prazo: {{ task.deadline }}</p>
+        <main class="main-right-side-create">
+          <div class="organize-card-detail">
+            <div class="card-delete">
+              <h3>Tem certeza que deseja deletar esta tarefa?</h3>
+              <p>Esta ação não pode ser desfeita.</p>
+              <form action="{% url 'delete_task' environment.id task.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="submit-btn">Sim, desejo deletar!</button>
+              </form>
+
+              <a class="submit-btn" href="{% url 'task_detail' environment.id task.id %}">Cancelar</a>
             </div>
           </div>
         </main>

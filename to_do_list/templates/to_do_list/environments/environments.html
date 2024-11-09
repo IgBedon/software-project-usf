@@ -28,8 +28,8 @@
               <a class="link-options" href="{% url 'create_environment' %}">Criar novo ambiente</a>
             </div>
           </div>
-          <div class="trash-div">
-            <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+          <div class="about-us-div">
+            <a class="link-options" href="{% url 'about_us' %}">Sobre nós</a>
           </div>
         </div>
       </div>
@@ -42,14 +42,20 @@
               {% for environment in environments %}
                 <a href="{% url 'environment' environment.id %}">
                   <div class="card">
-                    <h3 class="card-title">{{ environment.title }}</h3>
-                    <p class="card-description">{{ environment.description }}</p>
+                    <h3 class="card-title">{{ environment.title|slice:":20" }}{% if environment.title|length > 20 %}...{% endif %}</h3>
+                    <p class="card-description">{{ environment.description|slice:":30" }}{% if environment.description|length > 30 %}...{% endif %}</p>
                   </div>
                 </a>
               {% endfor %}
             </div>
           {% else %}
             <p class="text-motivation">Comece agora a organizar suas tarefas separando-as em ambientes!</p>
+          {% endif %}
+
+          {% if messages %}
+            {% for message in messages %}
+              <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}
           {% endif %}
         </main>
       </div>

@@ -28,14 +28,17 @@
               <a class="link-options" href="{% url 'environments' %}">Voltar para ambientes</a>
             </div>
             <div class="sidebar-options">
+              <a class="link-options" href="{% url 'update_environment' environment.id %}">Editar ambiente</a>
+            </div>
+            <div class="sidebar-options">
               <a class="link-options" href="{% url 'create_task' environment.id %}">Criar nova tarefa</a>
             </div>
             <div class="sidebar-options">
               <a class="link-options" href="{% url 'create_category' environment.id %}">Criar nova categoria</a>
             </div>
           </div>
-          <div class="trash-div">
-            <a class="link-options" href="{% url 'trash' %}">Lixeira</a>
+          <div class="about-us-div">
+            <a class="link-options" href="{% url 'about_us' %}">Sobre nós</a>
           </div>
         </div>
       </div>
@@ -50,8 +53,8 @@
                 {% for task in tasks %}
                   <a href="{% url 'task_detail' environment.id task.id %}">
                     <div class="card">
-                      <h3 class="card-title">{{ task.title }}</h3>
-                      <p class="card-description">{{ task.description }}</p>
+                      <h3 class="card-title">{{ task.title|slice:":20" }}{% if task.title|length > 20 %}...{% endif %}</h3>
+                      <p class="card-description">{{ task.description|slice:":20" }}{% if task.description|length > 20 %}...{% endif %}</p>
                       <p>Status: {{ task.status }}</p>
                       <p>Prioridade: {{ task.priority }}</p>
                       <p>Prazo: {{ task.deadline }}</p>
@@ -71,8 +74,8 @@
                 {% for category in categories %}
                   <a href="{% url 'category_detail' environment.id category.id %}">
                     <div class="card">
-                      <h3 class="card-title">{{ category.title }}</h3>
-                      <p class="card-description">{{ category.description }}</p>
+                      <h3 class="card-title">{{ category.title|slice:":20" }}{% if category.title|length > 20 %}...{% endif %}</h3>
+                      <p class="card-description">{{ category.description|slice:":30" }}{% if category.description|length > 30 %}...{% endif %}</p>
                       <p>Color: {{ category.color }}</p>
                     </div>
                   </a>
@@ -83,6 +86,12 @@
               <p class="text-motivation">Comece a criar suas categorias personalizadas!</p>
             {% endif %}
           </div>
+          
+          {% if messages %}
+            {% for message in messages %}
+              <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}
+          {% endif %}
         </main>
       </div>
     </div>

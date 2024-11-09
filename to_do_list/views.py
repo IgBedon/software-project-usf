@@ -66,6 +66,7 @@ def signin(request):
     return render(request, 'to_do_list/signin_login/login.html')
 
 
+@login_required
 def logout_user(request):
     logout(request)
     return redirect('login_user')
@@ -81,6 +82,7 @@ def account(request):
     return render(request, "to_do_list/account/account.html", context)
 
 
+@login_required
 def update_account(request):
     user = request.user
 
@@ -88,10 +90,10 @@ def update_account(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
 
-        if username != user.username or email != user.email:
-            User.objects.filter(id=user.id).update(username=username, email=email)
-
+        User.objects.filter(id=user.id).update(username=username, email=email)
+        messages.success(request, 'Alterações salvas com sucesso!')
         return redirect('account')
+        
 
     context = {
         'username' : user.username,
@@ -102,10 +104,12 @@ def update_account(request):
     return render(request, 'to_do_list/account/update_account.html', context)
 
 
+@login_required
 def delete_account(request):
     pass
 
 
+@login_required
 def update_account_password(request):
     user = User.objects.get(id=request.user.id)
 
@@ -170,9 +174,32 @@ def environment_selected(request, environment_id):
             'categories': categories
         }
     else:
+        messages.error('Ambiente não encontrado!')
         context = {}
 
     return render(request, 'to_do_list/environments/environment.html', context)
+
+
+@login_required
+def update_environment(request, environment_id):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        Environment.objects.filter(id=environment_id).update(title=title, description=description)
+        messages.success(request, 'Alterações salvas com sucesso!')
+        return redirect('environment', environment_id)
+    
+    environment = Environment.objects.filter(id=environment_id).first()
+    if environment:
+        context = {
+            'environment': environment
+        }
+    else:
+        messages.error('Ambiente não encontrado!')
+        context={}
+
+    return render(request, 'to_do_list/environments/update_environment.html', context)
 
 
 @login_required
@@ -198,17 +225,71 @@ def create_task(request, environment_id):
 
 @login_required
 def task_detail(request, environment_id, task_id):
-    task = Task.objects.filter(id=task_id)
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
 
     if task:
         context = {
+            'environment': environment,
             'task': task
         }
     else:
-        context = {}
+        messages.error('Tarefa não encontrada!')
+        context={}
 
     return render(request, 'to_do_list/tasks/task_detail.html', context)
 
+
+@login_required
+def update_task(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        status = request.POST.get('status')
+        priority = request.POST.get('priority')
+        deadline = request.POST.get('deadline')
+
+        Task.objects.filter(id=task_id).update(title=title, description=description, status=status, priority=priority, deadline=deadline)
+        messages.success(request, 'Alterações salvas com sucesso!')
+        return redirect('environment', environment_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+
+    return render(request, 'to_do_list/tasks/update_task.html', context)
+
+
+@login_required
+def delete_task(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+
+        task.delete()
+        messages.success(request, 'Tarefa deletada com sucesso!')
+        return redirect('environment', environment_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/tasks/delete_task.html', context)
 
 @login_required
 def create_category(request, environment_id):
@@ -232,17 +313,46 @@ def create_category(request, environment_id):
 @login_required
 def category_detail(request, environment_id, category_id):
     category = Category.objects.filter(id=category_id)
+    environment = Environment.objects.filter(id=environment_id).first()
 
     if category:
         context = {
+            'environment': environment,
             'category': category
         }
     else:
+        messages.error('Categoria não encontrada!')
         context = {}
 
     return render(request, 'to_do_list/categories/category_detail.html', context)
 
 
 @login_required
-def trash(request):
-    return HttpResponse('Lixeira')
+def update_category(request, environment_id, category_id):
+    category = Category.objects.filter(id=category_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        color = request.POST.get('color')
+
+        Category.objects.filter(id=category_id).update(title=title, description=description, color=color)
+        messages.success(request, 'Alterações salvas com sucesso!')
+        return redirect('environment', environment_id) 
+
+    if category:
+        context = {
+            'environment': environment,
+            'category': category
+        }
+    else:
+        messages.error('Categoria não encontrada!')
+        context = {}
+
+    return render(request, 'to_do_list/categories/update_category.html', context)
+
+
+@login_required
+def about_us(request):
+    return HttpResponse('Sobre nós')

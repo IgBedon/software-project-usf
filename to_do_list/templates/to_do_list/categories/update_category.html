@@ -1,0 +1,74 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body class="base-page">
+    <div class="body-main">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo" />
+          </div>
+        </div>
+        <div class="sidebar-body">
+          <div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para ambiente {{ environment.title }}</a>
+            </div>
+          </div>
+          <div class="about-us-div">
+            <a class="link-options" href="{% url 'about_us' %}">Sobre nós</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <main class="main-right-side-create profile-card">
+          <div class="organize-card">
+            <div class="profile-container">
+              <h2 class="profile-h2">Alterar informações da categoria</h2>
+              <form class="update-form" method="post" action="{% url 'update_category' environment.id category.id %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="category_title">Título da Categoria</label>
+                    <input type="text" id="category_title" name="title" value="{{ category.title }}" required />
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="category_description">Descrição da Categoria</label>
+                    <textarea id="category_description" name="description" required>{{ category.description }}</textarea>
+                  </div>
+      
+                  <div class="form-group">
+                    <label for="category_color">Cor da Categoria</label>
+                    <select id="category_color" name="color" required>
+                     <option value="green" {% if category.color == "green" %} selected {% endif %}>Verde</option>
+                      <option value="yellow"{% if category.color == "yellow" %} selected {% endif %}>Amarelo</option>
+                      <option value="red"{% if category.color == "red" %} selected {% endif %}>Vermelho</option>
+                      <option value="purple"{% if category.color == "purple" %} selected {% endif %}>Roxo</option>
+                      <option value="blue"{% if category.color == "blue" %} selected {% endif %}>Azul</option>
+                      <option value="pink"{% if category.color == "pink" %} selected {% endif %}>Rosa</option>
+                      <option value="black"{% if category.color == "black" %} selected {% endif %}>Preto</option>
+                      <option value="white"{% if category.color == "white" %} selected {% endif %}>Branco</option>
+                      <option value="orange"{% if category.color == "orange" %} selected {% endif %}>Laranja</option>
+                      <option value="grey"{% if category.color == "grey" %} selected {% endif %}>Cinza</option>
+                    </select>
+                  </div>
+      
+                  <button type="submit" class="submit-btn">Confirmar Alterações</button>
+              </form>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
