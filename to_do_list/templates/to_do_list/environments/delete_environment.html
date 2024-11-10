@@ -25,13 +25,7 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'update_category' environment.id category.id %}">Editar categoria</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'delete_category' environment.id category.id %}">Deletar categoria</a>
+              <a class="link-options" href="{% url 'environments' %}">Voltar para ambientes</a>
             </div>
           </div>
           <div class="about-us-div">
@@ -41,12 +35,17 @@
       </div>
 
       <div class="content">
-        <main class="main-right-side-show">
-          <div class='organize-card-detail'>
-            <div class="card-detail">
-              <h1 class="card-title">{{ category.title }}</h1>
-              <p class="card-description">{{ category.description }}</p>
-              <p>Color: {{ category.color }}</p>
+        <main class="main-right-side-create">
+          <div class="organize-card-detail">
+            <div class="card-delete">
+              <h3>Tem certeza que deseja deletar este ambiente?</h3>
+              <p>Esta ação não pode ser desfeita.</p>
+              <form action="{% url 'delete_environment' environment.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="submit-btn">Sim, desejo deletar!</button>
+              </form>
+
+              <a class="submit-btn" href="{% url 'environment' environment.id %}">Cancelar</a>
             </div>
           </div>
         </main>

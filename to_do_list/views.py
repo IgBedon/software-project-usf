@@ -9,7 +9,7 @@ from .models import Environment, Task, Category, Attachment
 
 @login_required
 def root(request):
-    return HttpResponse("Welcome to Easy Task")
+    return redirect('login_user')
 
 
 def register(request):
@@ -188,7 +188,7 @@ def update_environment(request, environment_id):
 
         Environment.objects.filter(id=environment_id).update(title=title, description=description)
         messages.success(request, 'Alterações salvas com sucesso!')
-        return redirect('environment', environment_id)
+        return redirect('environments')
     
     environment = Environment.objects.filter(id=environment_id).first()
     if environment:
@@ -200,6 +200,26 @@ def update_environment(request, environment_id):
         context={}
 
     return render(request, 'to_do_list/environments/update_environment.html', context)
+
+
+@login_required
+def delete_environment(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+        environment.delete()
+        messages.success(request, 'Ambiente deletado com sucesso!')
+        return redirect('environments')
+    
+    if environment:
+        context = {
+            'environment': environment,
+        }
+    else:
+        messages.error('Ambiente não encontrado!')
+        context={}
+
+    return render(request, 'to_do_list/environments/delete_environment.html', context)
 
 
 @login_required
@@ -312,7 +332,7 @@ def create_category(request, environment_id):
 
 @login_required
 def category_detail(request, environment_id, category_id):
-    category = Category.objects.filter(id=category_id)
+    category = Category.objects.filter(id=category_id).first()
     environment = Environment.objects.filter(id=environment_id).first()
 
     if category:
@@ -351,6 +371,29 @@ def update_category(request, environment_id, category_id):
         context = {}
 
     return render(request, 'to_do_list/categories/update_category.html', context)
+
+
+@login_required
+def delete_category(request, environment_id, category_id):
+    category = Category.objects.filter(id=category_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+        category.delete()
+        messages.success(request, 'Categoria deletada com sucesso!')
+        return redirect('environment', environment_id)
+    
+    if category:
+        context = {
+            'environment': environment,
+            'category': category
+        }
+    else:
+        messages.error('Categoria não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/categories/delete_category.html', context)
+
 
 
 @login_required
