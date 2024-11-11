@@ -23,6 +23,12 @@ urlpatterns = [
     path('environments/<int:environment_id>/tasks/<int:task_id>/update/', views.update_task, name="update_task"),
     path('environments/<int:environment_id>/tasks/<int:task_id>/delete/', views.delete_task, name="delete_task"),
 
+    path('environments/<int:environment_id>/tasks/<int:task_id>/add_attachment/', views.add_attachment, name="add_attachment"),
+    path('environments/<int:environment_id>/tasks/<int:task_id>/remove_attachment/', views.remove_attachment, name="remove_attachment"),
+
+    path('environments/<int:environment_id>/tasks/<int:task_id>/add_category/', views.add_category, name="add_category"),
+    path('environments/<int:environment_id>/tasks/<int:task_id>/remove_category/', views.remove_category, name="remove_category"),
+
     path('environments/<int:environment_id>/categories/create/', views.create_category, name="create_category"),
     path('environments/<int:environment_id>/categories/<int:category_id>/', views.category_detail, name="category_detail"),
     path('environments/<int:environment_id>/categories/<int:category_id>/update/', views.update_category, name="update_category"),

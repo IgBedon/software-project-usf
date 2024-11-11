@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -33,11 +34,13 @@ class Task(models.Model):
         return self.title
 
 
-class Attachment (models.Model):
-    title = models.CharField(max_length=100)
+class Attachment(models.Model):
+    title = models.CharField(max_length=100, blank=True)
     upload_date = models.DateTimeField(auto_now_add=True)
     file = models.FileField(upload_to='attachments/')
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title
+    def save(self, *args, **kwargs):
+        if not self.title and self.file:
+            self.title = os.path.splitext(self.file.name)[0]
+        super().save(*args, **kwargs)

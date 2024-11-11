@@ -4,7 +4,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
     <title>Home - Easy environment</title>
     <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
@@ -25,13 +25,19 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
+              <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
             </div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'update_task' environment.id task.id %}">Editar tarefa</a>
+              <a class="link-options" href="{% url 'update_task' environment.id task.id %}">Editar tarefa</a>
             </div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'delete_task' environment.id task.id %}">Deletar tarefa</a>
+              <a class="link-options" href="{% url 'add_category' environment.id task.id %}">Adicionar categoria</a>
+            </div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'remove_category' environment.id task.id %}">Remover categoria</a>
+            </div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'delete_task' environment.id task.id %}">Deletar tarefa</a>
             </div>
           </div>
           <div class="about-us-div">
@@ -42,15 +48,59 @@
 
       <div class="content">
         <main class="main-right-side-show">
-          <div class='organize-card-detail'>
+          <div class="organize-card-detail">
             <div class="card-detail">
               <h1 class="card-title">{{ task.title }}</h1>
               <p class="card-description">{{ task.description }}</p>
-              <p>Status: {{ task.status }}</p>
-              <p>Prioridade: {{ task.priority }}</p>
-              <p>Prazo: {{ task.deadline }}</p>
+              <p>
+                <strong>Status:</strong> {{ task.status }}
+              </p>
+              <p>
+                <strong>Prioridade:</strong> {{ task.priority }}
+              </p>
+              <p>
+                <strong>Prazo:</strong> {{ task.deadline }}
+              </p>
+
+              <h3>Categorias</h3>
+              <div class="container-category">
+                {% if categories %}
+                  <ul>
+                    {% for category in categories %}
+                      <li>{{ category.title }}</li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p>Não há categorias para esta tarefa.</p>
+                {% endif %}
+              </div>
+
+              <h3>Anexos</h3>
+              <div class="container-attachment">
+                {% if attachments %}
+                  {% for attachment in attachments %}
+                    <a class="attachment-link" href="{{ attachment.file.url }}" download="{{ attachment.title }}">{{ attachment.title }}</a>
+                  {% endfor %}
+                {% else %}
+                  <p>Não há anexos para esta tarefa.</p>
+                {% endif %}
+              </div>
+              <div class="attachment-div">
+                <div class="attachment-options">
+                  <a class="attachment-btn" href="{% url 'add_attachment' environment.id task.id %}">Adicionar anexo</a>
+                </div>
+                <div class="attachment-options">
+                  <a class="attachment-btn" href="{% url 'remove_attachment' environment.id task.id %}">Remover anexo</a>
+                </div>
+              </div>
             </div>
           </div>
+
+          {% if messages %}
+            {% for message in messages %}
+              <script src="{% static 'to_do_list/js/alert.js' %}" defer data-message="{{ message }}"></script>
+            {% endfor %}
+          {% endif %}
         </main>
       </div>
     </div>

@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75" />
+    <title>Home - Easy Task</title>
+    <link rel="stylesheet" href="{% static 'to_do_list/css/styles.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  </head>
+  <body class="base-page">
+    <header class="header-right-side">
+      <a class="account-link" href="{% url 'account' %}"><i class="fas fa-user"></i></a>
+      <a class="account-link" href="{% url 'logout' %}"><i class="fas fa-sign-out" aria-hidden="true"></i></a>
+    </header>
+
+    <div class="body-main">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <img src="{% static 'to_do_list/images/logo.svg' %}" alt="Easy Task Logo" />
+          </div>
+        </div>
+        <div class="sidebar-body">
+          <div>
+            <div class="sidebar-options">
+              <a class="link-options" href="{% url 'environments' %}">Voltar para ambientes</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <main class="main-right-side-show">
+          <div class="about-us">
+            <section class="about-section">
+              <h2>Nossa História</h2>
+              <p>Criado em 2024, o Easy Task nasceu com o objetivo de facilitar a organização de tarefas e o aperfeiçoar o desempenho de seus usuários. Desde então, temos trabalhado constantemente para trazer valor e clareza para nossos clientes, focando em sua qualidade durante a experiência de uso da aplicação.</p>
+            </section>
+
+            <section class="team-section">
+              <h2>Nosso Time</h2>
+              <div class="team-members">
+                <div class="team-member">
+                  <h3>Igor Bedon de Sousa</h3>
+                  <p>Desenvolvedor</p>
+                </div>
+                <div class="team-member">
+                  <h3>Érika Natally Dias</h3>
+                  <p>Desenvolvedor</p>
+                </div>
+                <div class="team-member">
+                  <h3>Yohan Schiaravella</h3>
+                  <p>Desenvolvedor</p>
+                </div>
+                <!-- Adicione mais membros da equipe conforme necessário -->
+              </div>
+            </section>
+
+            <footer>
+              <p>&copy; [2024] Easy Task. Todos os direitos reservados.</p>
+            </footer>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

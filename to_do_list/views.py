@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render
+from datetime import datetime
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
@@ -106,7 +107,13 @@ def update_account(request):
 
 @login_required
 def delete_account(request):
-    pass
+    if request.method == 'POST':
+        user = request.user
+        User.objects.filter(id=user.id).delete()
+        messages.success(request, 'Conta deletada com sucesso!')
+        return redirect('account')
+
+    return render(request, 'to_do_list/account/delete_account.html')
 
 
 @login_required
@@ -224,7 +231,7 @@ def delete_environment(request, environment_id):
 
 @login_required
 def create_task(request, environment_id):
-    environment = Environment.objects.filter(id=environment_id).first()
+    environment = get_object_or_404(Environment, id=environment_id)
     
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -232,9 +239,29 @@ def create_task(request, environment_id):
         status = request.POST.get('status')
         priority = request.POST.get('priority')
         deadline = request.POST.get('deadline')
+        attachment = request.FILES.get('attachment')
+        
+        try:
+            deadline = datetime.strptime(deadline, '%Y-%m-%d').date()
+        except ValueError:
+            messages.error(request, "Formato de data inválido.")
+            return redirect('create_task', environment_id=environment_id)
 
-        Task.objects.create(title=title, description=description, status=status, priority=priority, deadline=deadline, environment=environment)
-        return redirect('environment', environment_id) 
+        task = Task.objects.create(
+            title=title,
+            description=description,
+            status=status,
+            priority=priority,
+            deadline=deadline,
+            environment=environment
+        )
+
+        # Cria o anexo, se houver
+        if attachment:
+            Attachment.objects.create(file=attachment, task=task)
+        
+        messages.success(request, "Tarefa criada com sucesso!")
+        return redirect('environment', environment_id=environment_id)
 
     context = {
         'environment': environment 
@@ -247,11 +274,15 @@ def create_task(request, environment_id):
 def task_detail(request, environment_id, task_id):
     task = Task.objects.filter(id=task_id).first()
     environment = Environment.objects.filter(id=environment_id).first()
+    categories = task.categories.all()    
+    attachments = task.attachment_set.all()
 
     if task:
         context = {
             'environment': environment,
-            'task': task
+            'task': task,
+            'categories': categories,
+            'attachments': attachments,
         }
     else:
         messages.error('Tarefa não encontrada!')
@@ -310,6 +341,115 @@ def delete_task(request, environment_id, task_id):
         context={}
 
     return render(request, 'to_do_list/tasks/delete_task.html', context)
+
+
+@login_required
+def add_attachment(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+    attachments = task.attachment_set.all()
+
+    if request.method == 'POST':
+        attachment_title = request.POST.get('attachment')
+        attachment_file = request.FILES.get('attachment')
+
+        for attachment in attachments:
+            if attachment_file.name.split('.')[0] == attachment.title:
+                messages.error(request, 'Já existe um arquivo com esse nome!')
+                return redirect('task_detail', environment_id, task_id)
+
+        Attachment.objects.create(file=attachment_file, task=task)
+        messages.success(request, 'Anexo adicionado com sucesso!')
+        return redirect('task_detail', environment_id, task_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/attachment/add_attachment.html', context)
+
+
+@login_required
+def remove_attachment(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+    attachments = task.attachment_set.all()
+
+    if request.method == 'POST':
+        attachment_title = request.POST.get('attachment')
+        Attachment.objects.filter(title=attachment_title).delete()
+        messages.success(request, 'Anexo removido com sucesso!')
+        return redirect('task_detail', environment_id, task_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task,
+            'attachments' : attachments
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/attachment/remove_attachment.html', context)
+
+
+@login_required
+def add_category(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+    categories_environment = environment.category_set.all()
+    categories_task = task.categories.all()    
+    categories = [category for category in categories_environment if category not in categories_task]
+
+    if request.method == 'POST':
+        category_title = request.POST.get('category')
+        task.categories.add(Category.objects.get(title=category_title))
+        messages.success(request, 'Categoria adicionada com sucesso!')
+        return redirect('task_detail', environment_id, task_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task,
+            'categories': categories
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/tasks/add_category.html', context)
+
+
+@login_required
+def remove_category(request, environment_id, task_id):
+    task = Task.objects.filter(id=task_id).first()
+    environment = Environment.objects.filter(id=environment_id).first()
+    categories = task.categories.all()
+
+    if request.method == 'POST':
+        category_title = request.POST.get('category')
+        task.categories.remove(Category.objects.get(title=category_title))
+        messages.success(request, 'Categoria removida com sucesso!')
+        return redirect('task_detail', environment_id, task_id)
+    
+    if task:
+        context = {
+            'environment': environment,
+            'task': task,
+            'categories': categories
+        }
+    else:
+        messages.error('Tarefa não encontrada!')
+        context={}
+
+    return render(request, 'to_do_list/tasks/remove_category.html', context)
+
 
 @login_required
 def create_category(request, environment_id):
@@ -398,4 +538,4 @@ def delete_category(request, environment_id, category_id):
 
 @login_required
 def about_us(request):
-    return HttpResponse('Sobre nós')
+    return render(request, 'to_do_list/about_us/about_us.html')

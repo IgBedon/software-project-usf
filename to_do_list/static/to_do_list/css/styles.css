@@ -13,11 +13,16 @@ body {
 }
 
 .start-page {
-    background-color: #3498db; /* Cor de fundo */
-    background-image: url('/static/to_do_list/images/background-register.svg'); /* Imagem de fundo */
-    background-size: cover; /* Cobre toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
+    background-color: #3498db;
+    /* Cor de fundo */
+    background-image: url('/static/to_do_list/images/background-register.svg');
+    /* Imagem de fundo */
+    background-size: cover;
+    /* Cobre toda a tela */
+    background-position: center;
+    /* Centraliza a imagem */
+    background-attachment: fixed;
+    /* Fixa a imagem ao fundo ao rolar */
 }
 
 .container-transparent {
@@ -31,12 +36,13 @@ body {
 }
 
 .form-box {
-    background-color: #007bff; /* Gradiente */
+    background-color: #007bff;
+    /* Gradiente */
     color: white;
     padding: 40px;
     width: 500px;
     text-align: center;
-    
+
 }
 
 .form-box .logo img {
@@ -113,7 +119,7 @@ body {
     gap: 20px;
 }
 
-.header-right-side i{
+.header-right-side i {
     font-size: 25px;
 }
 
@@ -145,9 +151,12 @@ body {
 .sidebar-body {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Preenche o espaço restante */
-    justify-content: space-between; /* Posiciona items no topo e no final */
-    width: 100%; /* Para ocupar toda a largura */
+    height: 100%;
+    /* Preenche o espaço restante */
+    justify-content: space-between;
+    /* Posiciona items no topo e no final */
+    width: 100%;
+    /* Para ocupar toda a largura */
 }
 
 .sidebar-options {
@@ -160,10 +169,11 @@ body {
 .about-us-div {
     width: 100%;
     text-align: center;
-    margin-bottom: 80px; /* Para dar um espaço do final da sidebar */
+    margin-bottom: 80px;
+    /* Para dar um espaço do final da sidebar */
 }
 
-.about-us-div a{
+.about-us-div a {
     font-weight: bold;
 }
 
@@ -178,7 +188,7 @@ body {
 }
 
 .link-options {
-    display: inline-block; 
+    display: inline-block;
     width: 75%;
     text-decoration: none;
     color: white;
@@ -186,8 +196,8 @@ body {
     padding: 10px 5px;
     border-radius: 5px;
     background-color: #0056b3;
-    line-height: 1.4; 
-    word-wrap: break-word; 
+    line-height: 1.4;
+    word-wrap: break-word;
     white-space: normal;
 }
 
@@ -198,11 +208,14 @@ body {
 .content {
     display: flex;
     flex: 1;
+    /* background-color: rgb(231, 229, 229); */
     background-color: rgb(231, 229, 229);
-    height: 100vh;
-    width: 100vh;
+    height: 100%;
+    width: 100%;
+    /* Mudando de 100vh para 100% */
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    /* Mudando para flex-start para evitar centralizar o conteúdo verticalmente */
 }
 
 .header-right-side {
@@ -228,17 +241,69 @@ body {
 
 .main-right-side-show {
     display: flex;
-    min-height: 100vh;
-    justify-content: start;
-    align-items: start;
-    flex-grow: 1;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     font-size: 20px;
     color: #333;
     background-image: url('/static/to_do_list/images/content-show.svg');
-    background-size: cover; /* Cobre toda a tela */
-    background-position: center; /* Centraliza a imagem */
-    background-attachment: fixed; /* Fixa a imagem ao fundo ao rolar */
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh;
+    width: 100%;
+    padding: 10px;
+}
+
+.main-right-side-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: #333;
+    background-image: url('/static/to_do_list/images/content-create.svg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    height: 100vh;
+    width: 100%;
+    padding: 10px;
+}
+
+.title-main-right-side-show {
+    width: 95%;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    background-color:white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #007bff rgba(0, 0, 0, 0);
+    width: 100%;
+    padding-bottom: 50px;
+}
+
+.tasks-div,
+.categories-div {
+    flex-grow: 1;
+    /* Faz os divs crescerem conforme o conteúdo */
+    margin-bottom: 20px;
+}
+
+.tasks-div h2,
+.categories-div h2{
+    width: 95%;
+    background-color:white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .main-right-side-show h1, h2 {
@@ -314,6 +379,55 @@ body {
     background-color: #0056b3;
 }
 
+.container-attachment {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.container-category {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.container-category li {
+    margin-left: 20px;
+}
+
+.attachment-link {
+    flex: 1 1 auto;
+    text-decoration: none;
+    text-align: center;
+    background-color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #007bff;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.attachment-div {
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.attachment-options {
+    background-color: #0056b3;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.attachment-options a {
+    text-decoration: none;
+    color: white;
+}
+
+
 .text-motivation {
     margin-top: 20px;
     margin-left: 40px;
@@ -325,24 +439,24 @@ body {
     margin-top: 15px;
     margin-left: 15px;
     display: flex;
-    flex-wrap: wrap; /* Permite que os cards vão para a próxima linha, se necessário */
-    gap: 20px; /* Espaço entre os cards */
-    justify-content: flex-start; /* Alinha os cards à esquerda */
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
     align-items: start;
     padding: 20px;
 }
 
-.organize-card a{
+.organize-card a {
     text-decoration: none;
 }
 
 .card {
-    width: 300px; /* Largura fixa para que os cards fiquem alinhados em colunas */
+    width: 300px;
     height: 200px;
     padding: 30px;
     background-color: #007bff;
-    color: #fff; /* Cor do texto para garantir que ele seja visível */
-    border: 1px solid #dee2e6;
+    color: #fff;
+    border: 1px solid #007bff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
@@ -360,11 +474,11 @@ body {
 }
 
 .card-detail {
-    height: 50vh;
+    min-height: 50vh;
     width: 40%;
     padding: 30px;
     background-color: #007bff;
-    color: #fff; /* Cor do texto para garantir que ele seja visível */
+    color: #fff;
     border: 1px solid #dee2e6;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -373,12 +487,12 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-start;
+    gap: 15px;
 }
 
-.card-detail h1{
+.card-detail h1 {
     font-size: 30px;
     margin: 0;
-    
 }
 
 .card-delete {
@@ -394,7 +508,7 @@ body {
     gap: 20px;
     padding: 30px;
     min-height: 40%;
-    min-width:40%;
+    min-width: 40%;
     text-align: center;
 }
 
@@ -421,18 +535,10 @@ body {
     line-height: 1.4;
 }
 
-.main-right-side-create {
+.attachment-div {
     display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    font-size: 20px;
-    color: #333;
-    background-image: url('/static/to_do_list/images/content-create.svg');
-    background-size: cover; 
-    background-position: center;
-    background-attachment: fixed; 
+    margin-top: 20px;
+    width: 100%;
 }
 
 .create-form {
@@ -508,7 +614,7 @@ body {
     text-align: center;
 }
 
-.custom-file-label:hover{
+.custom-file-label:hover {
     transition: 0.3s;
     background-color: #007bff;
     color: white;
@@ -562,4 +668,67 @@ body {
 
 .profile-btn:hover {
     background-color: #0056b3;
+}
+
+.about-us {
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-section,
+.mission-section,
+.team-section {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us h2 {
+    margin-bottom: 10px;
+    color: #0056b3;
+}
+
+.about-us p {
+    margin-bottom: 15px;
+}
+
+.about-us ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.about-us ul li {
+    margin-bottom: 10px;
+}
+
+.team-members {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.team-member {
+    text-align: center;
+    width: 150px;
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.about-us footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    color: rgb(0, 0, 0);
+    margin-top: 20px;
 }

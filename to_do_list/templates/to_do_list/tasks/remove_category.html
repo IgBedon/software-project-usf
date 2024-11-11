@@ -25,13 +25,9 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'update_category' environment.id category.id %}">Editar categoria</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'delete_category' environment.id category.id %}">Deletar categoria</a>
+              <div class="link-background">
+                <a class="link-options" href="{% url 'task_detail' environment.id task.id %}">Voltar para detalhes da tarefa</a>
+              </div>
             </div>
           </div>
           <div class="about-us-div">
@@ -41,14 +37,26 @@
       </div>
 
       <div class="content">
-        <main class="main-right-side-show">
-          <div class='organize-card-detail'>
-            <div class="card-detail">
-              <h1 class="card-title">{{ category.title }}</h1>
-              <p class="card-description">{{ category.description }}</p>
-              <p>Color: {{ category.color }}</p>
+        <main class="main-right-side-create">
+          <form class="create-form" method="post" enctype="multipart/form-data" action="{% url 'remove_category' environment.id task.id %}">
+            {% csrf_token %}
+            <h1>Selecione a categoria que deseja remover:</h1>
+            <div class="form-group">
+              <div>
+                <label>Categoria</label><br />
+                <select id="category" name="category" required>
+                  <option value="" disabled selected>Selecione uma categoria</option>
+                  {% for categorie in categories %}
+                    <option value="{{ categorie.title }}">{{ categorie.title }}</option>
+                  {% endfor %}
+                </select>
+              </div>
             </div>
-          </div>
+
+            <script src="{% static 'to_do_list/js/get_file_name.js' %}" defer></script>
+
+            <button type="submit" class="submit-btn">Remover Categoria</button>
+          </form>
         </main>
       </div>
     </div>

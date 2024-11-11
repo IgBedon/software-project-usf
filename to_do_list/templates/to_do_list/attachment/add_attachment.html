@@ -25,13 +25,9 @@
         <div class="sidebar-body">
           <div>
             <div class="sidebar-options">
-                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'update_category' environment.id category.id %}">Editar categoria</a>
-            </div>
-            <div class="sidebar-options">
-                <a class="link-options" href="{% url 'delete_category' environment.id category.id %}">Deletar categoria</a>
+              <div class="link-background">
+                <a class="link-options" href="{% url 'task_detail' environment.id task.id %}">Voltar para detalhes da tarefa</a>
+              </div>
             </div>
           </div>
           <div class="about-us-div">
@@ -41,14 +37,22 @@
       </div>
 
       <div class="content">
-        <main class="main-right-side-show">
-          <div class='organize-card-detail'>
-            <div class="card-detail">
-              <h1 class="card-title">{{ category.title }}</h1>
-              <p class="card-description">{{ category.description }}</p>
-              <p>Color: {{ category.color }}</p>
+        <main class="main-right-side-create">
+          <form class="create-form" method="post" enctype="multipart/form-data" action="{% url 'add_attachment' environment.id task.id %}">
+            {% csrf_token %}
+            <h1>Insira o arquivo que deseja adicionar:</h1>
+            <div class="form-group">
+              <div>
+                <label>Anexo</label><br />
+                <input type="file" id="task_attachment" name="attachment" class="custom-file-input" />
+                <label for="task_attachment" class="custom-file-label" id="file-label">Adicionar arquivo</label>
+              </div>
             </div>
-          </div>
+
+            <script src="{% static 'to_do_list/js/get_file_name.js' %}" defer></script>
+
+            <button type="submit" class="submit-btn">Adicionar Anexo</button>
+          </form>
         </main>
       </div>
     </div>
