@@ -6,6 +6,8 @@ class Environment(models.Model):
     title = models.CharField(max_length=100)  
     description = models.TextField()
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    collaborators = models.ManyToManyField(User, related_name="collaborated_environments", blank=True)
+
 
     def __str__(self):
         return self.title

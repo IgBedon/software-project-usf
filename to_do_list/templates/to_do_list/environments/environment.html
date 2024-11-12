@@ -49,7 +49,13 @@
       <div class="content">
         <div class="main-right-side-create">
           <div class="title-main-right-side-show">
-            <h1>Ambiente: {{ environment.title }}</h1>
+            <div class="title-and-button">
+              <h1>Ambiente: {{ environment.title }}</h1>
+              <div>
+                <a href="{% url 'add_collaborator' environment.id %}" class="collaborator-btn">Adicionar Colaborador</a>
+                <a href="{% url 'remove_collaborator' environment.id %}" class="collaborator-btn">Remover Colaborador</a>
+              </div>
+            </div>
             <p>{{ environment.description }}</p>
           </div>
 

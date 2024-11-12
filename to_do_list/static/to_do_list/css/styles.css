@@ -379,6 +379,25 @@ body {
     background-color: #0056b3;
 }
 
+.title-and-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collaborator-btn {
+    background-color: #0056b3;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.collaborator-btn:hover {
+    background-color: #004494;
+}
+
 .container-attachment {
     display: flex;
     gap: 12px;

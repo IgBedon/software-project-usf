@@ -230,6 +230,49 @@ def delete_environment(request, environment_id):
 
 
 @login_required
+def add_collaborator(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id).first()
+
+    if request.method == 'POST':
+        collaborator_email = request.POST.get('email')
+        user = User.objects.filter(email=collaborator_email).first()
+
+        if user and user != request.user and user not in environment.collaborators.all():
+            environment.collaborators.add(user)
+            messages.success(request, f'Usuário {user.username} adicionado como colaborador.')
+            return redirect('environment', environment_id)
+        else:
+            messages.warning(request, 'Usuário já é colaborador ou não foi encontrado.')
+            return redirect('environment', environment_id)
+
+    context = {
+        'environment': environment,
+    }
+    
+    return render(request, 'to_do_list/collaborators/add_collaborator.html', context)
+
+
+@login_required
+def remove_collaborator(request, environment_id):
+    environment = Environment.objects.filter(id=environment_id).first()
+    collaborators = environment.collaborators.all()
+
+    if request.method == 'POST':
+        collaborator_email = request.POST.get('email')
+        user = User.objects.get(email=collaborator_email)
+        environment.collaborators.remove(user)
+        messages.success(request, f'Usuário {user.username} removido dos colaboradores.')
+        return redirect('environment', environment_id)
+
+    context = {
+        'environment': environment,
+        'collaborators': collaborators
+    }
+
+    return render(request, 'to_do_list/collaborators/remove_collaborator.html', context)
+
+
+@login_required
 def create_task(request, environment_id):
     environment = get_object_or_404(Environment, id=environment_id)
     
@@ -256,7 +299,6 @@ def create_task(request, environment_id):
             environment=environment
         )
 
-        # Cria o anexo, se houver
         if attachment:
             Attachment.objects.create(file=attachment, task=task)
         
@@ -350,7 +392,6 @@ def add_attachment(request, environment_id, task_id):
     attachments = task.attachment_set.all()
 
     if request.method == 'POST':
-        attachment_title = request.POST.get('attachment')
         attachment_file = request.FILES.get('attachment')
 
         for attachment in attachments:

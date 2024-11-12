@@ -18,6 +18,9 @@ urlpatterns = [
     path('environments/<int:environment_id>/update/', views.update_environment, name="update_environment"),
     path('environments/<int:environment_id>/delete/', views.delete_environment, name="delete_environment"),
 
+    path('environments/<int:environment_id>/add_collaborator/', views.add_collaborator, name="add_collaborator"),
+    path('environments/<int:environment_id>/remove_collaborator/', views.remove_collaborator, name="remove_collaborator"),
+
     path('environments/<int:environment_id>/tasks/create/', views.create_task, name="create_task"),
     path('environments/<int:environment_id>/tasks/<int:task_id>/', views.task_detail, name="task_detail"),
     path('environments/<int:environment_id>/tasks/<int:task_id>/update/', views.update_task, name="update_task"),

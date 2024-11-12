@@ -31,13 +31,13 @@
               <a class="link-options" href="{% url 'update_task' environment.id task.id %}">Editar tarefa</a>
             </div>
             <div class="sidebar-options">
+              <a class="link-options" href="{% url 'delete_task' environment.id task.id %}">Deletar tarefa</a>
+            </div>
+            <div class="sidebar-options">
               <a class="link-options" href="{% url 'add_category' environment.id task.id %}">Adicionar categoria</a>
             </div>
             <div class="sidebar-options">
               <a class="link-options" href="{% url 'remove_category' environment.id task.id %}">Remover categoria</a>
-            </div>
-            <div class="sidebar-options">
-              <a class="link-options" href="{% url 'delete_task' environment.id task.id %}">Deletar tarefa</a>
             </div>
           </div>
           <div class="about-us-div">

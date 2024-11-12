@@ -26,7 +26,7 @@
           <div>
             <div class="sidebar-options">
               <div class="link-background">
-                <a class="link-options" href="{% url 'task_detail' environment.id task.id %}">Voltar para detalhes da tarefa</a>
+                <a class="link-options" href="{% url 'environment' environment.id %}">Voltar para {{ environment.title }}</a>
               </div>
             </div>
           </div>
@@ -38,23 +38,22 @@
 
       <div class="content">
         <main class="main-right-side-create">
-          <form class="create-form" method="post" enctype="multipart/form-data" action="{% url 'remove_attachment' environment.id task.id %}">
+          <form class="create-form" method="post"  action="{% url 'remove_collaborator' environment.id %}">
             {% csrf_token %}
-            <h1>Escolha o arquivo que deseja remover:</h1>
+            <h1>Escolha o colaborador que deseja remover:</h1>
             <div class="form-group">
-              <div><br/>
-                <select id="attachment" name="attachment" required>
-                  <option value="" disabled selected>Selecione um arquivo</option>
-                  {% for attachment in attachments %}
-                    <option value="{{ attachment.title }}">{{ attachment.title }}</option>
+              <div>
+                <br />
+                <select id="email" name="email" required>
+                  <option value="" disabled selected>Selecione um colaborador</option>
+                  {% for collaborator in collaborators %}
+                    <option value="{{ collaborator.email }}">{{ collaborator.username }}: {{ collaborator.email }}</option>
                   {% endfor %}
                 </select>
               </div>
             </div>
 
-            <script src="{% static 'to_do_list/js/get_file_name.js' %}" defer></script>
-
-            <button type="submit" class="submit-btn">Remover Anexo</button>
+            <button type="submit" class="submit-btn">Remover Colaborador</button>
           </form>
         </main>
       </div>
