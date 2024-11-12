@@ -94,7 +94,10 @@
                         <p class="card-description">
                           {{ category.description|slice:':30' }}{% if category.description|length > 30 %}...{% endif %}
                         </p>
-                        <p>Color: {{ category.color }}</p>
+                        <div class="color-label">
+                          <span class="color-indicator" style="background-color: {{ category.color }};"></span>
+                          <p class="color-text">{{ category.color }}</p>
+                        </div>
                       </div>
                     </a>
                   {% endfor %}
@@ -102,6 +105,20 @@
               {% else %}
                 <h2>Categorias</h2>
                 <p class="text-motivation">Comece a criar suas categorias personalizadas!</p>
+              {% endif %}
+            </div>
+
+            <div class="categories-div">
+              {% if collaborators %}
+                <h2>Colaboradores</h2>
+                <div class="organize-card">
+                  {% for collaborator in collaborators %}
+                    <div class="card">
+                      <h3 class="card-title">{{ collaborator.username }}</h3>
+                      <p>{{ collaborator.email }}</p>
+                    </div>
+                  {% endfor %}
+                </div>
               {% endif %}
             </div>
 

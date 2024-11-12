@@ -175,10 +175,12 @@ def environment_selected(request, environment_id):
     if environment:
         tasks = Task.objects.filter(environment=environment)
         categories = Category.objects.filter(environment=environment)
+        collaborators = environment.collaborators.all()
         context = {
             'environment': environment,
             'tasks': tasks,
-            'categories': categories
+            'categories': categories,
+            'collaborators': collaborators
         }
     else:
         messages.error('Ambiente não encontrado!')
