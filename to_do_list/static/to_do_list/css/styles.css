@@ -551,7 +551,8 @@ body {
 }
 
 .update-form {
-    margin: 35px auto;
+    margin: 0 auto;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -686,6 +687,10 @@ body {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-section p{
+    text-align: justify;
 }
 
 .about-us h2 {
