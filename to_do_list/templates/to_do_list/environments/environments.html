@@ -36,21 +36,25 @@
 
       <div class="content">
         <main class="main-right-side-show">
-          <h1>Ambientes</h1>
-          {% if environments %}
-            <div class="organize-card">
-              {% for environment in environments %}
-                <a href="{% url 'environment' environment.id %}">
-                  <div class="card">
-                    <h3 class="card-title">{{ environment.title|slice:":20" }}{% if environment.title|length > 20 %}...{% endif %}</h3>
-                    <p class="card-description">{{ environment.description|slice:":30" }}{% if environment.description|length > 30 %}...{% endif %}</p>
-                  </div>
-                </a>
-              {% endfor %}
-            </div>
-          {% else %}
-            <p class="text-motivation">Comece agora a organizar suas tarefas separando-as em ambientes!</p>
-          {% endif %}
+          <div class="environments-div">
+            <h1>Ambientes</h1>
+            {% if environments %}
+              <div class="organize-card">
+                {% for environment in environments %}
+                  <a href="{% url 'environment' environment.id %}">
+                    <div class="card">
+                      <h3 class="card-title">{{ environment.title|slice:':20' }}{% if environment.title|length > 20 %}...{% endif %}</h3>
+                      <p class="card-description">
+                        {{ environment.description|slice:':30' }}{% if environment.description|length > 30 %}...{% endif %}
+                      </p>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+            {% else %}
+              <p class="text-motivation">Comece agora a organizar suas tarefas separando-as em ambientes!</p>
+            {% endif %}
+          </div>
 
           {% if messages %}
             {% for message in messages %}

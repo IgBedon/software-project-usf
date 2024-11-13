@@ -43,10 +43,13 @@
       <div class="content">
         <main class="main-right-side-show">
           <div class='organize-card-detail'>
-            <div class="card-detail">
+            <div class="card-detail-category">
               <h1 class="card-title">{{ category.title }}</h1>
               <p class="card-description">{{ category.description }}</p>
-              <p>Color: {{ category.color }}</p>
+              <div class="color-label">
+                <p class="color-text">Cor:</p>  
+                <span class="color-indicator" style="background-color: {{ category.color }};"></span>
+              </div>
             </div>
           </div>
         </main>

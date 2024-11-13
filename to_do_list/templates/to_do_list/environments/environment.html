@@ -47,7 +47,7 @@
       </div>
 
       <div class="content">
-        <div class="main-right-side-create">
+        <div class="main-right-side-create-environment">
           <div class="title-main-right-side-show">
             <div class="title-and-button">
               <h1>Ambiente: {{ environment.title }}</h1>
@@ -95,8 +95,8 @@
                           {{ category.description|slice:':30' }}{% if category.description|length > 30 %}...{% endif %}
                         </p>
                         <div class="color-label">
+                          <p class="color-text">Cor:</p>  
                           <span class="color-indicator" style="background-color: {{ category.color }};"></span>
-                          <p class="color-text">{{ category.color }}</p>
                         </div>
                       </div>
                     </a>
